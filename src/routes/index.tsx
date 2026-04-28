@@ -2,20 +2,36 @@ import { createFileRoute } from "@tanstack/react-router";
 import heroImg from "@/assets/jane-hero.jpeg";
 import aboutImg from "@/assets/jane-about.jpeg";
 import ctaImg from "@/assets/jane-cta.jpeg";
-import { ArrowRight, Check, Instagram, Sparkles, Target, TrendingUp, Workflow } from "lucide-react";
+import { ArrowRight, Check, Instagram, Menu, Search, Settings, Target, X } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const CTA_LINK = "#contato";
+// TODO: substitua pelo link real do WhatsApp ou Calendly
+const CTA_LINK = "https://wa.me/0000000000";
 
-function GoldButton({ href, children, variant = "solid" }: { href: string; children: React.ReactNode; variant?: "solid" | "outline" }) {
+function GoldButton({
+  href,
+  children,
+  variant = "solid",
+  className = "",
+}: {
+  href: string;
+  children: React.ReactNode;
+  variant?: "solid" | "outline";
+  className?: string;
+}) {
   const base =
-    "group inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-semibold tracking-wide uppercase transition-all duration-300";
+    "group inline-flex items-center justify-center gap-2 rounded-md px-7 py-4 text-sm font-bold tracking-[0.12em] uppercase transition-all duration-300";
   if (variant === "outline") {
     return (
-      <a href={href} target="_blank" rel="noopener" className={`${base} border border-gold/60 text-gold hover:bg-gold hover:text-primary-foreground`}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener"
+        className={`${base} border border-gold/60 text-gold hover:bg-gold hover:text-primary-foreground ${className}`}
+      >
         {children}
       </a>
     );
@@ -25,11 +41,10 @@ function GoldButton({ href, children, variant = "solid" }: { href: string; child
       href={href}
       target="_blank"
       rel="noopener"
-      className={`${base} text-primary-foreground shadow-gold hover:translate-y-[-2px] hover:shadow-elegant`}
+      className={`${base} text-primary-foreground shadow-gold hover:translate-y-[-2px] hover:shadow-elegant ${className}`}
       style={{ background: "var(--gradient-gold)" }}
     >
       {children}
-      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
     </a>
   );
 }
@@ -37,14 +52,20 @@ function GoldButton({ href, children, variant = "solid" }: { href: string; child
 function Nav() {
   return (
     <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-gold" />
-          <span className="font-display text-lg tracking-wide">Jane Santana</span>
-        </div>
-        <a href={CTA_LINK} target="_blank" rel="noopener" className="hidden items-center gap-2 rounded-full border border-border px-5 py-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition hover:border-gold hover:text-gold md:inline-flex">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10">
+        <button aria-label="Menu" className="flex h-10 w-10 items-center justify-center rounded-md border border-gold/40 text-gold">
+          <Menu className="h-5 w-5" />
+        </button>
+        <span className="font-display text-xl tracking-wide text-foreground">Jane Santana</span>
+        <a
+          href={CTA_LINK}
+          target="_blank"
+          rel="noopener"
+          className="hidden items-center gap-2 rounded-full border border-gold/60 px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-gold transition hover:bg-gold hover:text-primary-foreground md:inline-flex"
+        >
           Falar com Jane
         </a>
+        <span className="md:hidden h-10 w-10" />
       </div>
     </header>
   );
@@ -52,43 +73,29 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-dark pb-20 pt-32 lg:pt-40">
-      <div className="pointer-events-none absolute -left-40 top-20 h-[500px] w-[500px] rounded-full opacity-20 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
-      <div className="pointer-events-none absolute -right-32 bottom-0 h-[400px] w-[400px] rounded-full opacity-10 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-8 lg:px-10">
-        <div className="order-2 lg:order-1">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-card/40 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-gold backdrop-blur">
+    <section className="relative overflow-hidden bg-background">
+      <div className="absolute inset-0">
+        <img src={heroImg} alt="Jane Santana, Consultora Master de IA" className="h-full w-full object-cover object-[70%_center] lg:object-[65%_center]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/10 lg:from-background lg:via-background/70 lg:to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
+      </div>
+      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-6 pb-20 pt-32 lg:min-h-[88vh] lg:justify-center lg:px-10 lg:pb-28 lg:pt-40">
+        <div className="max-w-xl">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-gold">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Consultora Master de IA
           </div>
-          <h1 className="text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl xl:text-7xl">
-            Pare de operar <span className="text-gradient-gold">no caos.</span><br />
-            Comece a operar <span className="italic font-medium">por sistema.</span>
+          <h1 className="font-display text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-6xl xl:text-[68px]">
+            Negócio organizado,<br />
+            lucro previsível.<br />
+            <span className="text-gradient-gold">Comece a escalar.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Implemento <span className="text-foreground">processos e Sistema de Inteligência</span> para empreendedores que já faturam — e estão prontos para escalar com clareza, margem e domínio total da operação.
+          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Saia do caos operacional e assuma o controle com <span className="text-foreground">Sistemas de Inteligência</span> para quem já fatura.
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <GoldButton href={CTA_LINK}>Quero meu diagnóstico</GoldButton>
-            <GoldButton href={CTA_LINK} variant="outline">Ver como funciona</GoldButton>
-          </div>
-          <div className="mt-12 grid grid-cols-3 gap-6 border-t border-border/50 pt-8 text-left">
-            {[
-              { k: "+R$5k", v: "faturamento mínimo" },
-              { k: "100%", v: "implementação prática" },
-              { k: "1:1", v: "consultoria sob medida" },
-            ].map((s) => (
-              <div key={s.v}>
-                <div className="font-display text-2xl text-gold sm:text-3xl">{s.k}</div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{s.v}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="relative order-1 lg:order-2">
-          <div className="absolute -inset-4 rounded-[2rem] opacity-30 blur-2xl" style={{ background: "var(--gradient-gold)" }} />
-          <div className="relative overflow-hidden rounded-[2rem] border border-gold/20 shadow-elegant">
-            <img src={heroImg} alt="Jane Santana, Consultora Master de IA" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+          <div className="mt-8">
+            <GoldButton href={CTA_LINK} className="w-full sm:w-auto">
+              Quero minha consultoria <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </GoldButton>
           </div>
         </div>
       </div>
@@ -97,71 +104,42 @@ function Hero() {
 }
 
 function Pain() {
-  const items = [
-    "Você fatura, mas não sabe exatamente de onde vem o lucro.",
-    "A operação depende inteiramente de você — e isso trava o crescimento.",
-    "Tarefas se acumulam, decisões atrasam e dinheiro escapa por falta de processo.",
-    "Você sente que poderia escalar, mas não tem o sistema para sustentar.",
+  const items: Array<[string, string]> = [
+    ["Seu dinheiro some no", "final do mês?"],
+    ["Seu negócio", "só roda se você estiver?"],
+    ["O crescimento te", "sobrecarrega?"],
+    ["Tudo bagunçado", "e sem controle?"],
   ];
   return (
-    <section className="bg-background py-24">
-      <div className="mx-auto max-w-4xl px-6 text-center lg:px-10">
-        <p className="mb-4 text-xs uppercase tracking-[0.3em] text-gold">Diagnóstico sem rodeio</p>
-        <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-          Faturar não é o problema.<br />
-          <span className="text-gradient-gold">Operar no caos é.</span>
-        </h2>
-        <div className="mx-auto mt-12 grid max-w-3xl gap-4 text-left">
-          {items.map((t) => (
-            <div key={t} className="flex items-start gap-4 rounded-xl border border-border bg-card/50 p-5 transition hover:border-gold/40">
-              <div className="mt-1 flex h-6 w-6 flex-none items-center justify-center rounded-full border border-gold/40 text-gold">✕</div>
-              <p className="text-base text-foreground/90">{t}</p>
-            </div>
-          ))}
-        </div>
+    <section className="bg-cream py-20 text-cream-foreground">
+      <div className="mx-auto max-w-3xl space-y-6 px-6 text-center sm:space-y-7 lg:px-10">
+        {items.map(([a, b], i) => (
+          <p key={i} className="font-display text-2xl leading-tight sm:text-3xl lg:text-4xl">
+            {i % 2 === 0 ? (
+              <>
+                <span className="font-normal">{a} </span>
+                <span className="font-bold">{b}</span>
+              </>
+            ) : (
+              <>
+                <span className="font-bold">{a} </span>
+                <span className="font-normal">{b}</span>
+              </>
+            )}
+          </p>
+        ))}
       </div>
     </section>
   );
 }
 
-function About() {
+function GoldBanner() {
   return (
-    <section className="relative bg-gradient-dark py-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-[5fr_6fr] lg:px-10">
-        <div className="relative">
-          <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
-          <div className="relative overflow-hidden rounded-[2rem] border border-gold/20 shadow-elegant">
-            <img src={aboutImg} alt="Jane Santana" className="h-full w-full object-cover" />
-          </div>
-        </div>
-        <div>
-          <p className="mb-4 text-xs uppercase tracking-[0.3em] text-gold">Sobre Jane</p>
-          <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-            Direta, estratégica e <span className="text-gradient-gold">imponente.</span>
-          </h2>
-          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            Não vendo ilusão. <span className="text-foreground">Entrego direção.</span> Como Consultora Master de IA, eu enxergo o gargalo, exponho o erro e construo com você um Sistema de Inteligência que devolve margem, tempo e controle.
-          </p>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Trabalho com quem já fatura R$5k+/mês e está cansado de improvisar. Aqui se constrói operação — não promessa.
-          </p>
-          <ul className="mt-8 space-y-3">
-            {[
-              "Análise cirúrgica do seu modelo atual",
-              "Implementação de IA aplicada ao seu negócio",
-              "Processos que rodam sem depender de você",
-              "Margem maior, decisão mais rápida, lucro previsível",
-            ].map((t) => (
-              <li key={t} className="flex items-start gap-3 text-foreground/90">
-                <Check className="mt-1 h-5 w-5 flex-none text-gold" />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-          <a href="https://instagram.com" target="_blank" rel="noopener" className="mt-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition hover:text-gold">
-            <Instagram className="h-4 w-4" /> @instagram
-          </a>
-        </div>
+    <section className="bg-background py-14">
+      <div className="mx-auto max-w-4xl px-6 text-center lg:px-10">
+        <h2 className="text-gradient-gold font-display text-2xl font-semibold leading-tight sm:text-3xl lg:text-4xl">
+          É hora de ter lucro de verdade,<br />não apenas faturar.
+        </h2>
       </div>
     </section>
   );
@@ -169,29 +147,139 @@ function About() {
 
 function Method() {
   const steps = [
-    { icon: Target, title: "01 · Diagnóstico", desc: "Mapeamos onde o dinheiro escapa, onde o processo falha e onde a IA acelera." },
-    { icon: Workflow, title: "02 · Sistema", desc: "Construímos o Sistema de Inteligência sob medida: fluxos, automações e governança." },
-    { icon: TrendingUp, title: "03 · Escala", desc: "Implementamos, treinamos e ajustamos até a operação rodar com margem e previsibilidade." },
+    {
+      icon: Search,
+      title: "Diagnóstico Completo",
+      desc: "Identificamos o erro e o desperdício de dinheiro.",
+    },
+    {
+      icon: Target,
+      title: "Processos Padronizados",
+      desc: "Atendimento e operação estruturados.",
+    },
+    {
+      icon: Settings,
+      title: "Implementação IA Inteligente",
+      desc: "Automação que aumenta vendas sem perder personalização.",
+    },
   ];
   return (
-    <section className="bg-background py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="mb-4 text-xs uppercase tracking-[0.3em] text-gold">O método</p>
-          <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
-            Três movimentos. <span className="text-gradient-gold">Zero rodeio.</span>
-          </h2>
-        </div>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.title} className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition hover:border-gold/50 hover:shadow-gold">
-              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-gold/30 text-gold">
-                <s.icon className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-xl text-foreground">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+    <section className="bg-cream py-16 text-cream-foreground">
+      <div className="mx-auto grid max-w-5xl gap-5 px-6 sm:grid-cols-3 lg:px-10">
+        {steps.map((s) => (
+          <div key={s.title} className="rounded-xl border border-cream-foreground/10 bg-background/[0.02] p-7 text-center shadow-sm">
+            <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-cream-foreground/5 text-cream-foreground">
+              <s.icon className="h-5 w-5" />
             </div>
-          ))}
+            <h3 className="font-display text-lg font-bold">{s.title}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-cream-foreground/70">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BeforeAfter() {
+  const before = [
+    "Trabalho o dia inteiro, lucro zero.",
+    "Negócio refém de você.",
+    "Perda de clientes.",
+    "Sobrecarregado com o crescimento.",
+  ];
+  const after = [
+    "Lucro previsível e real.",
+    "Negócio organizado e escalável.",
+    "Mais vendas, menos esforço.",
+    "Previsibilidade e controle.",
+  ];
+  return (
+    <section className="bg-background py-20">
+      <div className="mx-auto grid max-w-5xl gap-10 px-6 sm:grid-cols-2 sm:gap-0 sm:divide-x sm:divide-border lg:px-10">
+        <div className="sm:pr-10">
+          <h3 className="font-display text-2xl font-bold text-muted-foreground sm:text-3xl">Antes (Caos)</h3>
+          <ul className="mt-6 space-y-4">
+            {before.map((t) => (
+              <li key={t} className="flex items-start gap-3 text-muted-foreground">
+                <X className="mt-1 h-4 w-4 flex-none text-muted-foreground/60" />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="sm:pl-10">
+          <h3 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+            Depois <span className="text-gradient-gold">(Controle)</span>
+          </h3>
+          <ul className="mt-6 space-y-4">
+            {after.map((t) => (
+              <li key={t} className="flex items-start gap-3 text-foreground/90">
+                <Check className="mt-1 h-4 w-4 flex-none text-gold" />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  const items = [
+    {
+      quote: "Finalmente entendi para onde meu dinheiro estava indo. Agora tenho lucro!",
+      name: "Pedro Silva",
+      role: "Empreendedor",
+    },
+    {
+      quote: "Organizei minha operação e pude focar no crescimento estratégico.",
+      name: "Ana Souza",
+      role: "CEO",
+    },
+  ];
+  return (
+    <section className="bg-cream py-16 text-cream-foreground">
+      <div className="mx-auto grid max-w-5xl gap-6 px-6 sm:grid-cols-2 lg:px-10">
+        {items.map((t) => (
+          <figure key={t.name} className="rounded-xl bg-background/[0.03] p-7">
+            <blockquote className="text-base leading-relaxed">"{t.quote}"</blockquote>
+            <figcaption className="mt-5 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/30 font-display text-sm font-bold text-cream-foreground">
+                {t.name.split(" ").map((n) => n[0]).join("")}
+              </div>
+              <div>
+                <div className="font-bold">{t.name}</div>
+                <div className="text-sm text-cream-foreground/70">{t.role}</div>
+              </div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section className="bg-cream py-16 text-cream-foreground">
+      <div className="mx-auto grid max-w-5xl items-center gap-10 px-6 sm:grid-cols-[1.1fr_1fr] lg:px-10">
+        <div>
+          <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-cream-foreground/60">Sobre Jane</p>
+          <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            Sua guia para a <span className="italic">escala.</span>
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-cream-foreground/80">
+            Sou a especialista que <span className="font-semibold">corta o erro</span> e te guia para a solução com lógica. Direta, estratégica e didática — não vendo ilusão, entrego direção.
+          </p>
+          <p className="mt-3 text-base leading-relaxed text-cream-foreground/80">
+            Como <span className="font-semibold">Consultora Master de IA</span>, implemento processos e Sistemas de Inteligência para empreendedores que já faturam R$5k+/mês e querem parar de operar no caos.
+          </p>
+        </div>
+        <div className="relative">
+          <div className="overflow-hidden rounded-2xl shadow-elegant">
+            <img src={aboutImg} alt="Jane Santana" className="h-full w-full object-cover" />
+          </div>
         </div>
       </div>
     </section>
@@ -200,28 +288,20 @@ function Method() {
 
 function FinalCTA() {
   return (
-    <section id="contato" className="relative overflow-hidden bg-gradient-dark py-24">
-      <div className="pointer-events-none absolute inset-0 opacity-30" style={{ background: "radial-gradient(circle at 70% 50%, oklch(0.78 0.12 80 / 0.25), transparent 60%)" }} />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:px-10">
-        <div className="relative order-2 lg:order-1">
-          <div className="absolute -inset-6 rounded-[2rem] opacity-25 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
-          <div className="relative overflow-hidden rounded-[2rem] border border-gold/20 shadow-elegant">
-            <img src={ctaImg} alt="Jane Santana convidando você para a próxima etapa" className="h-full w-full object-cover" />
-          </div>
-        </div>
-        <div className="order-1 lg:order-2">
-          <p className="mb-4 text-xs uppercase tracking-[0.3em] text-gold">Sua próxima decisão</p>
-          <h2 className="text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Você já fatura.<br />
-            Agora é hora de <span className="text-gradient-gold">escalar com sistema.</span>
-          </h2>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Vagas limitadas para consultoria 1:1. Se você está pronto para parar de perder dinheiro no improviso, fale comigo agora.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <GoldButton href={CTA_LINK}>Agendar diagnóstico</GoldButton>
-            <GoldButton href={CTA_LINK} variant="outline">Falar no WhatsApp</GoldButton>
-          </div>
+    <section id="contato" className="relative overflow-hidden bg-background">
+      <div className="absolute inset-0">
+        <img src={ctaImg} alt="" aria-hidden className="h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+      </div>
+      <div className="relative mx-auto max-w-3xl px-6 py-20 text-center lg:px-10 lg:py-28">
+        <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+          Tenha o negócio organizado e<br />
+          <span className="text-gradient-gold">escalável que você merece.</span>
+        </h2>
+        <div className="mt-10 flex justify-center">
+          <GoldButton href={CTA_LINK}>
+            Agende sua consultoria agora <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </GoldButton>
         </div>
       </div>
     </section>
@@ -230,19 +310,15 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border bg-background py-10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-sm text-muted-foreground md:flex-row lg:px-10">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-gold" />
-          <span className="font-display tracking-wide text-foreground">Jane Santana</span>
-          <span className="text-muted-foreground/70">— Consultora Master de IA</span>
+    <footer className="border-t border-border bg-background py-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-3 px-6 text-sm text-muted-foreground md:flex-row md:items-center lg:px-10">
+        <div>
+          <div className="font-display text-base text-foreground">Jane Santana</div>
+          <div className="text-xs text-muted-foreground/70">© {new Date().getFullYear()} Jane Santana</div>
         </div>
-        <div className="flex items-center gap-6">
-          <a href="https://instagram.com" target="_blank" rel="noopener" className="inline-flex items-center gap-2 transition hover:text-gold">
-            <Instagram className="h-4 w-4" /> @instagram
-          </a>
-          <span>© {new Date().getFullYear()} Todos os direitos reservados.</span>
-        </div>
+        <a href="https://instagram.com" target="_blank" rel="noopener" className="inline-flex items-center gap-2 transition hover:text-gold">
+          <Instagram className="h-4 w-4" /> @instagram
+        </a>
       </div>
     </footer>
   );
@@ -254,8 +330,11 @@ function Index() {
       <Nav />
       <Hero />
       <Pain />
-      <About />
+      <GoldBanner />
       <Method />
+      <BeforeAfter />
+      <Testimonials />
+      <About />
       <FinalCTA />
       <Footer />
     </main>
