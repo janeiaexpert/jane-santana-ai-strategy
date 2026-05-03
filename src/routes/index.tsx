@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import heroImg from "@/assets/jane-hero.jpeg";
 import { ArrowRight, Check, Instagram, Menu, Search, Settings, Target, X } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -73,8 +72,7 @@ function Hero() {
   return (
     <section className="relative overflow-hidden bg-background">
       <div className="absolute inset-0">
-        <img src={heroImg} alt="Jane Santana, Consultora Master de IA" className="h-full w-full object-cover object-[70%_center] lg:object-[65%_center]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/10 lg:from-background lg:via-background/70 lg:to-transparent" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 70% 40%, color-mix(in oklab, var(--gold) 22%, transparent), transparent 60%)" }} />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </div>
       <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-6 pb-20 pt-32 lg:min-h-[88vh] lg:justify-center lg:px-10 lg:pb-28 lg:pt-40">
