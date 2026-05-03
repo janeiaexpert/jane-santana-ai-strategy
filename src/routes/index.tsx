@@ -71,28 +71,70 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden bg-background">
+      {/* Atmosphere */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 70% 40%, color-mix(in oklab, var(--gold) 22%, transparent), transparent 60%)" }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 30%, color-mix(in oklab, var(--gold) 18%, transparent), transparent 65%)",
+          }}
+        />
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(color-mix(in oklab, var(--gold) 60%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--gold) 60%, transparent) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          }}
+        />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </div>
-      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-6 pb-20 pt-32 lg:min-h-[88vh] lg:justify-center lg:px-10 lg:pb-28 lg:pt-40">
-        <div className="max-w-xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/40 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-gold">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Consultora Master de IA
-          </div>
-          <h1 className="font-display text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-6xl xl:text-[68px]">
-            Negócio organizado,<br />
-            lucro previsível.<br />
-            <span className="text-gradient-gold">Comece a escalar.</span>
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Saia do caos operacional e assuma o controle com <span className="text-foreground">Sistemas de Inteligência</span> para quem já fatura.
-          </p>
-          <div className="mt-8">
-            <GoldButton href={CTA_LINK} className="w-full sm:w-auto">
-              Quero minha consultoria <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </GoldButton>
-          </div>
+
+      <div className="relative mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-6 pb-20 pt-32 text-center lg:min-h-[92vh] lg:px-10 lg:pb-28 lg:pt-40">
+        {/* Top gold rule */}
+        <div className="mb-8 flex items-center gap-4 text-gold">
+          <span className="h-px w-10 bg-gold/60" />
+          <span className="text-[10px] uppercase tracking-[0.4em]">Jane Santana</span>
+          <span className="h-px w-10 bg-gold/60" />
+        </div>
+
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/40 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-gold">
+          <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Consultora Master de IA
+        </div>
+
+        <h1 className="font-display text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-6xl xl:text-[72px]">
+          Negócio organizado,<br />
+          lucro previsível.<br />
+          <span className="text-gradient-gold">Comece a escalar.</span>
+        </h1>
+
+        <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Saia do caos operacional e assuma o controle com{" "}
+          <span className="text-foreground">Sistemas de Inteligência</span> para quem já fatura.
+        </p>
+
+        <div className="mt-10 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
+          <GoldButton href={CTA_LINK} className="w-full sm:w-auto">
+            Quero minha consultoria <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </GoldButton>
+        </div>
+
+        {/* Stats / authority strip */}
+        <div className="mt-16 grid w-full max-w-3xl grid-cols-3 gap-px overflow-hidden rounded-xl border border-gold/20 bg-gold/10">
+          {[
+            ["+R$5k", "ticket mínimo de quem atendo"],
+            ["IA", "implementada com método"],
+            ["100%", "direção, sem ilusão"],
+          ].map(([n, l]) => (
+            <div key={l} className="bg-background/80 px-4 py-5 text-center backdrop-blur">
+              <div className="text-gradient-gold font-display text-2xl font-bold sm:text-3xl">{n}</div>
+              <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{l}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
