@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import heroImg from "@/assets/jane-hero.jpeg";
-import aboutImg from "@/assets/jane-about.jpeg";
-import ctaImg from "@/assets/jane-cta.jpeg";
 import { ArrowRight, Check, Instagram, Menu, Search, Settings, Target, X } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -263,7 +261,7 @@ function Testimonials() {
 function About() {
   return (
     <section className="bg-cream py-16 text-cream-foreground">
-      <div className="mx-auto grid max-w-5xl items-center gap-10 px-6 sm:grid-cols-[1.1fr_1fr] lg:px-10">
+      <div className="mx-auto max-w-3xl px-6 lg:px-10">
         <div>
           <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-cream-foreground/60">Sobre Jane</p>
           <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
@@ -276,11 +274,6 @@ function About() {
             Como <span className="font-semibold">Consultora Master de IA</span>, implemento processos e Sistemas de Inteligência para empreendedores que já faturam R$5k+/mês e querem parar de operar no caos.
           </p>
         </div>
-        <div className="relative">
-          <div className="overflow-hidden rounded-2xl shadow-elegant">
-            <img src={aboutImg} alt="Jane Santana" className="h-full w-full object-cover" />
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -290,8 +283,7 @@ function FinalCTA() {
   return (
     <section id="contato" className="relative overflow-hidden bg-background">
       <div className="absolute inset-0">
-        <img src={ctaImg} alt="" aria-hidden className="h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, color-mix(in oklab, var(--gold) 18%, transparent), transparent 60%)" }} />
       </div>
       <div className="relative mx-auto max-w-3xl px-6 py-20 text-center lg:px-10 lg:py-28">
         <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
