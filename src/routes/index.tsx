@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowRight, Check, Instagram, Menu, Search, Settings, Target, X } from "lucide-react";
+import janePerfil from "@/assets/jane-perfil.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// TODO: substitua pelo link real do WhatsApp ou Calendly
-const CTA_LINK = "https://wa.me/0000000000";
+const CTA_LINK = "https://wa.me/5581994707455";
 
 function GoldButton({
   href,
@@ -46,13 +47,62 @@ function GoldButton({
   );
 }
 
+function ProfilePhoto({ size = "md" }: { size?: "md" | "lg" }) {
+  const dims = size === "lg" ? "h-40 w-40 sm:h-48 sm:w-48" : "h-28 w-28 sm:h-32 sm:w-32";
+  return (
+    <div className={`${dims} rounded-full p-1 shadow-gold`} style={{ background: "var(--gradient-gold)" }}>
+      <img
+        src={janePerfil.url}
+        alt="Jane Santana, Consultora Master de IA"
+        className="h-full w-full rounded-full border-4 border-background object-cover"
+      />
+    </div>
+  );
+}
+
 function Nav() {
+  const [open, setOpen] = useState(false);
+  const links = [
+    { label: "Início", href: "#inicio" },
+    { label: "Método", href: "#metodo" },
+    { label: "Sobre Jane", href: "#sobre" },
+    { label: "Contato", href: "#contato" },
+  ];
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10">
-        <button aria-label="Menu" className="flex h-10 w-10 items-center justify-center rounded-md border border-gold/40 text-gold">
-          <Menu className="h-5 w-5" />
-        </button>
+        <div className="relative">
+          <button
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-gold/40 text-gold transition hover:bg-gold/10"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+          {open && (
+            <nav className="absolute left-0 top-12 w-52 rounded-xl border border-gold/30 bg-card/95 p-2 shadow-elegant backdrop-blur">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-lg px-4 py-2.5 text-sm font-medium text-foreground transition hover:bg-gold/10 hover:text-gold"
+                >
+                  {l.label}
+                </a>
+              ))}
+              <a
+                href={CTA_LINK}
+                target="_blank"
+                rel="noopener"
+                className="mt-1 block rounded-lg px-4 py-2.5 text-sm font-semibold text-gold transition hover:bg-gold/10"
+              >
+                Falar com Jane
+              </a>
+            </nav>
+          )}
+        </div>
         <span className="font-display text-xl tracking-wide text-foreground">Jane Santana</span>
         <a
           href={CTA_LINK}
@@ -70,7 +120,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-background">
+    <section id="inicio" className="relative overflow-hidden bg-background">
       {/* Atmosphere */}
       <div className="absolute inset-0">
         <div
@@ -95,6 +145,8 @@ function Hero() {
       </div>
 
       <div className="relative mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-6 pb-20 pt-32 text-center lg:min-h-[92vh] lg:px-10 lg:pb-28 lg:pt-40">
+        <ProfilePhoto size="lg" />
+        <div className="h-8" />
         {/* Top gold rule */}
         <div className="mb-8 flex items-center gap-4 text-gold">
           <span className="h-px w-10 bg-gold/60" />
@@ -202,7 +254,7 @@ function Method() {
     },
   ];
   return (
-    <section className="bg-cream py-16 text-cream-foreground">
+    <section id="metodo" className="bg-cream py-16 text-cream-foreground">
       <div className="mx-auto grid max-w-5xl gap-5 px-6 sm:grid-cols-3 lg:px-10">
         {steps.map((s) => (
           <div key={s.title} className="rounded-xl border border-cream-foreground/10 bg-background/[0.02] p-7 text-center shadow-sm">
@@ -263,44 +315,9 @@ function BeforeAfter() {
   );
 }
 
-function Testimonials() {
-  const items = [
-    {
-      quote: "Finalmente entendi para onde meu dinheiro estava indo. Agora tenho lucro!",
-      name: "Pedro Silva",
-      role: "Empreendedor",
-    },
-    {
-      quote: "Organizei minha operação e pude focar no crescimento estratégico.",
-      name: "Ana Souza",
-      role: "CEO",
-    },
-  ];
-  return (
-    <section className="bg-cream py-16 text-cream-foreground">
-      <div className="mx-auto grid max-w-5xl gap-6 px-6 sm:grid-cols-2 lg:px-10">
-        {items.map((t) => (
-          <figure key={t.name} className="rounded-xl bg-background/[0.03] p-7">
-            <blockquote className="text-base leading-relaxed">"{t.quote}"</blockquote>
-            <figcaption className="mt-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/30 font-display text-sm font-bold text-cream-foreground">
-                {t.name.split(" ").map((n) => n[0]).join("")}
-              </div>
-              <div>
-                <div className="font-bold">{t.name}</div>
-                <div className="text-sm text-cream-foreground/70">{t.role}</div>
-              </div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function About() {
   return (
-    <section className="bg-cream py-16 text-cream-foreground">
+    <section id="sobre" className="bg-cream py-16 text-cream-foreground">
       <div className="mx-auto max-w-3xl px-6 lg:px-10">
         <div>
           <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-cream-foreground/60">Sobre Jane</p>
@@ -325,7 +342,9 @@ function FinalCTA() {
       <div className="absolute inset-0">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, color-mix(in oklab, var(--gold) 18%, transparent), transparent 60%)" }} />
       </div>
-      <div className="relative mx-auto max-w-3xl px-6 py-20 text-center lg:px-10 lg:py-28">
+      <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-20 text-center lg:px-10 lg:py-28">
+        <ProfilePhoto />
+        <div className="h-8" />
         <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
           Tenha o negócio organizado e<br />
           <span className="text-gradient-gold">escalável que você merece.</span>
@@ -365,7 +384,6 @@ function Index() {
       <GoldBanner />
       <Method />
       <BeforeAfter />
-      <Testimonials />
       <About />
       <FinalCTA />
       <Footer />
