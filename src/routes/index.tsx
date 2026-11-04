@@ -120,7 +120,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-background">
+    <section id="inicio" className="relative overflow-hidden bg-background">
       {/* Atmosphere */}
       <div className="absolute inset-0">
         <div
@@ -145,6 +145,8 @@ function Hero() {
       </div>
 
       <div className="relative mx-auto flex min-h-[100svh] max-w-5xl flex-col items-center justify-center px-6 pb-20 pt-32 text-center lg:min-h-[92vh] lg:px-10 lg:pb-28 lg:pt-40">
+        <ProfilePhoto size="lg" />
+        <div className="h-8" />
         {/* Top gold rule */}
         <div className="mb-8 flex items-center gap-4 text-gold">
           <span className="h-px w-10 bg-gold/60" />
@@ -252,7 +254,7 @@ function Method() {
     },
   ];
   return (
-    <section className="bg-cream py-16 text-cream-foreground">
+    <section id="metodo" className="bg-cream py-16 text-cream-foreground">
       <div className="mx-auto grid max-w-5xl gap-5 px-6 sm:grid-cols-3 lg:px-10">
         {steps.map((s) => (
           <div key={s.title} className="rounded-xl border border-cream-foreground/10 bg-background/[0.02] p-7 text-center shadow-sm">
@@ -350,7 +352,7 @@ function Testimonials() {
 
 function About() {
   return (
-    <section className="bg-cream py-16 text-cream-foreground">
+    <section id="sobre" className="bg-cream py-16 text-cream-foreground">
       <div className="mx-auto max-w-3xl px-6 lg:px-10">
         <div>
           <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-cream-foreground/60">Sobre Jane</p>
