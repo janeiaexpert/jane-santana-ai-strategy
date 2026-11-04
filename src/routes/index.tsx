@@ -7,7 +7,21 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const CTA_LINK = "https://wa.me/5581994707455";
+const WHATSAPP_NUMBER = "5581994707455";
+const WHATSAPP_MESSAGE = "Olá, Jane! Vim pela sua página e quero organizar minha operação para escalar.";
+const CTA_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
+// Abre o WhatsApp em uma aba nova. Se o navegador bloquear a aba nova,
+// navega na própria aba — assim o botão sempre funciona.
+function openWhatsApp(event: React.MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+  const opened = window.open(CTA_LINK, "_blank");
+  if (opened) {
+    opened.opener = null;
+    return;
+  }
+  window.location.href = CTA_LINK;
+}
 
 function GoldButton({
   href,
@@ -28,6 +42,7 @@ function GoldButton({
         href={href}
         target="_blank"
         rel="noopener"
+        onClick={openWhatsApp}
         className={`${base} border border-gold/60 text-gold hover:bg-gold hover:text-primary-foreground ${className}`}
       >
         {children}
@@ -39,6 +54,7 @@ function GoldButton({
       href={href}
       target="_blank"
       rel="noopener"
+      onClick={openWhatsApp}
       className={`${base} text-primary-foreground shadow-gold hover:translate-y-[-2px] hover:shadow-elegant ${className}`}
       style={{ background: "var(--gradient-gold)" }}
     >
