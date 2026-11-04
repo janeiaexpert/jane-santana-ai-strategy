@@ -315,41 +315,6 @@ function BeforeAfter() {
   );
 }
 
-function Testimonials() {
-  const items = [
-    {
-      quote: "Finalmente entendi para onde meu dinheiro estava indo. Agora tenho lucro!",
-      name: "Pedro Silva",
-      role: "Empreendedor",
-    },
-    {
-      quote: "Organizei minha operação e pude focar no crescimento estratégico.",
-      name: "Ana Souza",
-      role: "CEO",
-    },
-  ];
-  return (
-    <section className="bg-cream py-16 text-cream-foreground">
-      <div className="mx-auto grid max-w-5xl gap-6 px-6 sm:grid-cols-2 lg:px-10">
-        {items.map((t) => (
-          <figure key={t.name} className="rounded-xl bg-background/[0.03] p-7">
-            <blockquote className="text-base leading-relaxed">"{t.quote}"</blockquote>
-            <figcaption className="mt-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/30 font-display text-sm font-bold text-cream-foreground">
-                {t.name.split(" ").map((n) => n[0]).join("")}
-              </div>
-              <div>
-                <div className="font-bold">{t.name}</div>
-                <div className="text-sm text-cream-foreground/70">{t.role}</div>
-              </div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function About() {
   return (
     <section id="sobre" className="bg-cream py-16 text-cream-foreground">
@@ -377,7 +342,9 @@ function FinalCTA() {
       <div className="absolute inset-0">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, color-mix(in oklab, var(--gold) 18%, transparent), transparent 60%)" }} />
       </div>
-      <div className="relative mx-auto max-w-3xl px-6 py-20 text-center lg:px-10 lg:py-28">
+      <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-20 text-center lg:px-10 lg:py-28">
+        <ProfilePhoto />
+        <div className="h-8" />
         <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
           Tenha o negócio organizado e<br />
           <span className="text-gradient-gold">escalável que você merece.</span>
@@ -417,7 +384,6 @@ function Index() {
       <GoldBanner />
       <Method />
       <BeforeAfter />
-      <Testimonials />
       <About />
       <FinalCTA />
       <Footer />
