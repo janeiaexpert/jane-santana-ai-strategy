@@ -47,13 +47,62 @@ function GoldButton({
   );
 }
 
+function ProfilePhoto({ size = "md" }: { size?: "md" | "lg" }) {
+  const dims = size === "lg" ? "h-40 w-40 sm:h-48 sm:w-48" : "h-28 w-28 sm:h-32 sm:w-32";
+  return (
+    <div className={`${dims} rounded-full p-1 shadow-gold`} style={{ background: "var(--gradient-gold)" }}>
+      <img
+        src={janePerfil.url}
+        alt="Jane Santana, Consultora Master de IA"
+        className="h-full w-full rounded-full border-4 border-background object-cover"
+      />
+    </div>
+  );
+}
+
 function Nav() {
+  const [open, setOpen] = useState(false);
+  const links = [
+    { label: "Início", href: "#inicio" },
+    { label: "Método", href: "#metodo" },
+    { label: "Sobre Jane", href: "#sobre" },
+    { label: "Contato", href: "#contato" },
+  ];
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10">
-        <button aria-label="Menu" className="flex h-10 w-10 items-center justify-center rounded-md border border-gold/40 text-gold">
-          <Menu className="h-5 w-5" />
-        </button>
+        <div className="relative">
+          <button
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-gold/40 text-gold transition hover:bg-gold/10"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+          {open && (
+            <nav className="absolute left-0 top-12 w-52 rounded-xl border border-gold/30 bg-card/95 p-2 shadow-elegant backdrop-blur">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-lg px-4 py-2.5 text-sm font-medium text-foreground transition hover:bg-gold/10 hover:text-gold"
+                >
+                  {l.label}
+                </a>
+              ))}
+              <a
+                href={CTA_LINK}
+                target="_blank"
+                rel="noopener"
+                className="mt-1 block rounded-lg px-4 py-2.5 text-sm font-semibold text-gold transition hover:bg-gold/10"
+              >
+                Falar com Jane
+              </a>
+            </nav>
+          )}
+        </div>
         <span className="font-display text-xl tracking-wide text-foreground">Jane Santana</span>
         <a
           href={CTA_LINK}
