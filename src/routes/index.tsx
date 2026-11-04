@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowRight, Check, Instagram, Menu, Search, Settings, Target, X } from "lucide-react";
+import janePerfil from "@/assets/jane-perfil.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// TODO: substitua pelo link real do WhatsApp ou Calendly
-const CTA_LINK = "https://wa.me/0000000000";
+const CTA_LINK = "https://wa.me/5581994707455";
 
 function GoldButton({
   href,
